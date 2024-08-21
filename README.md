@@ -48,14 +48,14 @@ cp config/config.yaml.default config/config.yaml
 ### Start project
 #### Option1: pip
 ```bash
-# for dev
-source venv/bin/activate
-flask [--app app] run [--debug] [--host=0.0.0.0] [--port=5000]
-
-# for prod
 source venv/bin/activate
 export FLASK_APP=app.py
-export PROJECT_ENV=prod
+
+# for dev
+export FLASK_ENV=development
+flask [--app app] run [--debug] [--host=0.0.0.0] [--port=5000]
+# for prod
+export FLASK_ENV=production
 uwsgi --ini uwsgi.ini
 # uwsgi --reload logs/uwsgi.pid
 # uwsgi --stop logs/uwsgi.pid
@@ -63,13 +63,14 @@ uwsgi --ini uwsgi.ini
 
 #### Option2: poetry
 ```bash
-# for dev
-poetry run flask [--app app] run [--debug --host=0.0.0.0:5000]
-
-# for prod
 poetry shell
 export FLASK_APP=app.py
-export PROJECT_ENV=prod
+
+# for dev
+export FLASK_ENV=development
+flask [--app app] run [--debug --host=0.0.0.0:5000]
+# for prod
+export FLASK_ENV=production
 uwsgi --ini uwsgi.ini
 # uwsgi --reload logs/uwsgi.pid
 # uwsgi --stop logs/uwsgi.pid
