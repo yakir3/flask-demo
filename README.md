@@ -2,7 +2,7 @@
 [![Flask](https://img.shields.io/badge/flask-3.0.3-blue)](https://flask.palletsprojects.com/en/3.0.x/)
 
 ### Docker start mysql
-```shell
+```bash
 mkdir ./volume
 
 docker run --name flask-demo \
@@ -13,8 +13,12 @@ docker run --name flask-demo \
   -d mysql:5.7 --character-set-server=utf8mb4
 ```
 
-### Poetry Virtualenv Init
-```shell
+### Python pip env
+```bash
+```
+
+### Python poetry env
+```bash
 # Install Python3
 https://www.python.org/downloads/release/python-3109/
 
@@ -31,7 +35,7 @@ poetry env use `which python3.12`
 
 
 # Install denpencies
-poetry add Flask
+#poetry add Flask
 poetry install
 
 # Project init
@@ -41,37 +45,32 @@ mkdir ./logs ./static ./templates
 cp config/config.yaml.default config/config.yaml
 ```
 
-### Virtualenv start project
-```shell
-# Option 1
+### Start project
+#### Option1: pip
+```bash
 # for dev
-poetry shell
-python manage.py migrate
-flask [--app app] run [--debug --host=0.0.0.0:5000]
-
+source venv/bin/activate
+flask [--app app] run [--debug] [--host=0.0.0.0] [--port=5000]
 
 # for prod
+source venv/bin/activate
+export FLASK_APP=app.py
 export PROJECT_ENV=prod
-poetry shell
 uwsgi --ini uwsgi.ini
 # uwsgi --reload logs/uwsgi.pid
 # uwsgi --stop logs/uwsgi.pid
+```
 
-
-# Option 2
+#### Option2: poetry
+```bash
 # for dev
-poetry run python manage.py makemigrations
-poetry run python manage.py migrate
-#poetry run python manage.py collectstatic --noinput
-poetry run python manage.py runserver 0.0.0.0:8888
+poetry run flask [--app app] run [--debug --host=0.0.0.0:5000]
 
 # for prod
+poetry shell
+export FLASK_APP=app.py
 export PROJECT_ENV=prod
-poetry run python manage.py makemigrations
-poetry run python manage.py migrate
-#poetry run python manage.py collectstatic --noinput
-poetry run uwsgi --ini uwsgi.ini
-# poetry run uwsgi --reload logs/uwsgi.pid
-# poetry run uwsgi --stop logs/uwsgi.pid
-#tail -f logs/uwsgi.log
+uwsgi --ini uwsgi.ini
+# uwsgi --reload logs/uwsgi.pid
+# uwsgi --stop logs/uwsgi.pid
 ```

@@ -1,34 +1,33 @@
-NAME = yakir/picProject
-VERSION = 1.1
-DOCKER_REGISTRY = hub.docker.com/
-PUSH_NAME = library/uatproxy
+# env
 APP_PORT = 8080
-
-.PHONY: clean build all
-all: build docker-build clean
-
-clean:
-	@#rm *.o temp tmp
-	@#docker image prune -f
-
-build: *.py
-	@#echo no need to build
-
-docker-build: docker-image docker-run docker-tag docker-push
-#docker-build: docker-image docker-push
+NAME = flask-demo
+VERSION = 0.1
+DOCKER_REGISTRY = hub.docker.com/
+DOCKER_PUSH_NAME = flask-demo
 
 
-.ONESHELL: docker-image docker-tag docker-push docker-run
-docker-image:
-	docker build -t ${NAME}:${VERSION} -f APP-META/Dockerfile .
+# pip env
+.PHONY: requirements test
 
-docker-tag:
-	@docker tag ${NAME}:${VERSION} ${DOCKER_REGISTRY}${PUSH_NAME}:${VERSION}
+.venv:
+    python3 -m venv .venv
 
-docker-push:
-	docker push ${DOCKER_REGISTRY}${PUSH_NAME}:${VERSION}
+requirements:
+	#pip freeze > requirements.txt
+    source .venv/bin/activate && \
+        python3 -m pip install -r requirements.txt && \
+        python3 -m pip install pytest
 
-container_name = uatproxy
-docker-run: db.sqlite3
-	docker stop ${container_name}
-	@#docker run --name ${container_name} --rm -d -p ${APP_PORT}:${APP_PORT} ${NAME}:${VERSION}
+test: .venv requirements dev-requirements
+    source .venv/bin/activate && \
+        pytest
+
+
+# poetry
+.PHONY: requirements test
+
+requirements:
+    poetry install
+
+test: requirements
+    poetry run pytest
