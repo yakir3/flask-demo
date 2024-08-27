@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 flask = "^3.0.3"
+uwsgi = "^2.0.26"
 
 
 [build-system]

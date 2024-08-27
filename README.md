@@ -15,6 +15,9 @@ docker run --name flask-demo \
 
 ### Python pip env
 ```bash
+python3 -m venv .venv
+python3 -m pip install -r requirements.txt
+python3 -m pip install pytest
 ```
 
 ### Python poetry env
@@ -30,26 +33,31 @@ export PATH="$PATH:/root/.local/bin"
 
 
 # Create Virtualenv
-poetry init
+#poetry init
+poetry config virtualenvs.in-project true
 poetry env use `which python3.12`
 
 
 # Install denpencies
 #poetry add Flask
 poetry install
-
-# Project init
-# Create dirs
-mkdir ./logs ./static ./templates
-# Init config
-cp config/config.yaml.default config/config.yaml
 ```
 
-### Start project
-#### Option1: pip
+### How To Use
+#### Init
 ```bash
-source venv/bin/activate
-export FLASK_APP=app.py
+# Create dirs
+mkdir ./logs ./static ./templates
+
+# config
+mv config.py.default config.py
+```
+
+#### Start project
+##### Option1: pip
+```bash
+source .venv/bin/activate
+export FLASK_APP=manage.py
 
 # for dev
 export FLASK_ENV=development
@@ -61,10 +69,10 @@ uwsgi --ini uwsgi.ini
 # uwsgi --stop logs/uwsgi.pid
 ```
 
-#### Option2: poetry
+##### Option2: poetry
 ```bash
 poetry shell
-export FLASK_APP=app.py
+export FLASK_APP=manage.py
 
 # for dev
 export FLASK_ENV=development

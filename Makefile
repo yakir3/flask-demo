@@ -23,11 +23,12 @@ test: .venv requirements dev-requirements
         pytest
 
 
-# poetry
-.PHONY: requirements test
+# # poetry env
+# .PHONY: requirements test
 
-requirements:
-    poetry install
+# requirements:
+# 	poetry config virtualenvs.in-project true
+#     poetry install
 
-test: requirements
-    poetry run pytest
+# test: requirements
+#     poetry run pytest

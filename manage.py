@@ -1,6 +1,6 @@
 from flask import Flask
 from markupsafe import escape
-from myapp import myapp
+from flaskr import myapp
 
 app = Flask(__name__)
 
@@ -13,4 +13,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0")
