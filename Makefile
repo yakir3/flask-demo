@@ -1,34 +1,37 @@
-# env
 APP_PORT = 8080
-NAME = flask-demo
+APP_NAME = flask-demo
 VERSION = 0.1
-DOCKER_REGISTRY = hub.docker.com/
-DOCKER_PUSH_NAME = flask-demo
+DOCKER_REGISTRY = hub.docker.com/yakirinp
 
 
-# pip env
+# # Option1: pip env
+# .PHONY: requirements test
+
+# .venv:
+#     python3 -m venv .venv
+
+# requirements:
+# 	#pip freeze > requirements.txt
+#     source .venv/bin/activate && \
+#         python3 -m pip install -r requirements.txt && \
+#         python3 -m pip install pytest
+
+# test: .venv requirements dev-requirements
+#     source .venv/bin/activate && \
+#         pytest
+
+
+# Option2: poetry env
 .PHONY: requirements test
 
 .venv:
-    python3 -m venv .venv
+	poetry config virtualenvs.in-project true
+	poetry env use `which python3.12`
 
 requirements:
-	#pip freeze > requirements.txt
-    source .venv/bin/activate && \
-        python3 -m pip install -r requirements.txt && \
-        python3 -m pip install pytest
+	poetry config virtualenvs.in-project true --local
+	poetry install
 
-test: .venv requirements dev-requirements
-    source .venv/bin/activate && \
-        pytest
-
-
-# # poetry env
-# .PHONY: requirements test
-
-# requirements:
-# 	poetry config virtualenvs.in-project true
-#     poetry install
-
-# test: requirements
-#     poetry run pytest
+test: .venv requirements
+	echo heretest
+	# poetry run pytest
