@@ -30,14 +30,12 @@ python3 -m pip install -r requirements.txt
 
 # Start for dev
 source .venv/bin/activate
-export FLASK_APP=manage.py
 export FLASK_ENV=development
-flask [--app app] run [--debug] [--host=0.0.0.0] [--port=5000]
+flask [--app flaskr] run [--debug] [--host=0.0.0.0] [--port=5000]
 
 
 # Start for prod
 source .venv/bin/activate
-export FLASK_APP=manage.py
 export FLASK_ENV=production
 uwsgi --ini uwsgi.ini
 uwsgi --reload logs/uwsgi.pid
@@ -65,14 +63,12 @@ poetry install
 
 # Start for dev
 poetry shell
-export FLASK_APP=manage.py
 export FLASK_ENV=development
-flask [--app app] run [--debug --host=0.0.0.0:5000]
+flask [--app flaskr] run [--debug --host=0.0.0.0:5000]
 
 
 # Start for prod
 poetry shell
-export FLASK_APP=manage.py
 export FLASK_ENV=production
 uwsgi --ini uwsgi.ini
 uwsgi --reload logs/uwsgi.pid
