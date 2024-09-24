@@ -74,3 +74,16 @@ uwsgi --ini uwsgi.ini
 uwsgi --reload logs/uwsgi.pid
 uwsgi --stop logs/uwsgi.pid
 ```
+
+## Make the Project Installable
+
+```bash
+# Build and publish
+poetry build
+poetry config pypi-token.pypi pypi-token-xxxxx
+poetry publish
+
+# Install
+pip install flaskexample
+poetry add flaskexample
+```
