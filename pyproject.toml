@@ -4,14 +4,20 @@ version = "0.1.0"
 description = "This is a Python demo project with Flask"
 authors = ["Yakir <yakir3@duck.com>"]
 readme = "README.md"
-#package-mode = false
-#packages = [{include = ""}]
+
+[tool.coverage.run]
+branch = true
+source = ["flaskexample"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 flask = "^3.0.3"
 uwsgi = "^2.0.26"
+pytest = "^8.3.3"
+coverage = "^7.6.1"
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [build-system]
 requires = ["poetry-core"]

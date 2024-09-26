@@ -31,7 +31,7 @@ python3 -m pip install -r requirements.txt
 # Start for dev
 source .venv/bin/activate
 export FLASK_ENV=development
-flask [--app flaskr] run [--debug] [--host=0.0.0.0] [--port=5000]
+flask [--app flaskexample] run [--debug] [--host=0.0.0.0] [--port=5000]
 
 
 # Start for prod
@@ -64,7 +64,7 @@ poetry install
 # Start for dev
 poetry shell
 export FLASK_ENV=development
-flask [--app flaskr] run [--debug --host=0.0.0.0:5000]
+flask [--app flaskexample] run [--debug --host=0.0.0.0:5000]
 
 
 # Start for prod
