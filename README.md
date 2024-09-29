@@ -28,6 +28,10 @@ python3 -m pip install pytest
 python3 -m pip install -r requirements.txt
 
 
+# Init db and config
+flask --app flaskr init-db
+
+
 # Start for dev
 source .venv/bin/activate
 export FLASK_ENV=development
@@ -60,6 +64,9 @@ poetry add Flask
 poetry install
 
 
+# Init db and config
+flask --app flaskr init-db
+
 
 # Start for dev
 poetry shell
@@ -83,7 +90,12 @@ poetry build
 poetry config pypi-token.pypi pypi-token-xxxxx
 poetry publish
 
+
 # Install
+# option1
+pip install dist/flaskexample-0.1.0-py3-none-any.whl
+# option2
 pip install flaskexample
+# option3
 poetry add flaskexample
 ```
