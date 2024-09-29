@@ -29,7 +29,7 @@ python3 -m pip install -r requirements.txt
 
 
 # Init db and config
-flask --app flaskr init-db
+flask --app flaskexample init-db
 
 
 # Start for dev
@@ -65,7 +65,7 @@ poetry install
 
 
 # Init db and config
-flask --app flaskr init-db
+flask --app flaskexample init-db
 
 
 # Start for dev
